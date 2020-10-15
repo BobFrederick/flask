@@ -28,4 +28,12 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, Bacon!'
 
+     # call the database initialization function from this app factory
+    from . import db
+    db.init_app(app)
+
+    # import and register the authentication blueprint
+    from . import auth
+    app.register_blueprint(auth.bp)
+
     return app
